@@ -36,28 +36,29 @@ STEER_ANGLE_STEP = 2
 
 
 class Exercise(object):
+                                                                                                                            
     def __init__(self, node):
         self.msg = Control_Command()
         # TODO 2 create writer
-        self.writer = node.create_writer(
-            "/control", Control_Command)
+        self.writer = node.create_writer("/control", Control_Command)
         self.loop()
 
-    def hotkey_w(self):
+    def hotkey_2(self):
         throttle = self.msg.throttle + THROTTLE_STEP
         self.msg.throttle = THROTTLE_MAX if throttle >= THROTTLE_MAX else throttle
 
-    def hotkey_s(self):
+    def hotkey_4(self):
         throttle = self.msg.throttle - THROTTLE_STEP
         self.msg.throttle = THROTTLE_MIN if throttle <= THROTTLE_MIN else throttle
 
-    def hotkey_a(self):
+    def hotkey_6(self):
         steer_angle = self.msg.steer_angle + STEER_ANGLE_STEP
         self.msg.steer_angle = STEER_ANGLE_MAX if steer_angle >= STEER_ANGLE_MAX else steer_angle
 
-    def hotkey_d(self):
+    def hotkey_8(self):
         steer_angle = self.msg.steer_angle - STEER_ANGLE_STEP
         self.msg.steer_angle = STEER_ANGLE_MIN if steer_angle <= STEER_ANGLE_MIN else steer_angle
+
 
     def loop(self):
         try:
@@ -65,15 +66,17 @@ class Exercise(object):
                 try :
                     c = sys.stdin.read(1)
                     if c:
-                        # print("Got character", repr(c))
+                        #print("Got character", repr(c))
                         # TODO 3 update your logic by keyboad
-                        # if c == 'w': self.hotkey_w()
-                        # if c == 's': self.hotkey_s()
-                        # if c == 'a': self.hotkey_a()
-                        # if c == 'd': self.hotkey_d()
+
+
+                        if c == '2': self.hotkey_2()
+                        if c == '4': self.hotkey_4()
+                        if c == '6': self.hotkey_6()                                                               
+                        if c == '8': self.hotkey_8()
                         print(self.msg)
                         # TODO 4 write control message to channel /control
-                        # self.writer.write(self.msg)
+                        self.writer.write(self.msg)
                         # ratio domain 100hz
                         time.sleep(0.01)
                 except IOError: pass
@@ -85,8 +88,9 @@ if __name__ == '__main__':
     cyber.init()
 
     # TODO 1 update node to your name
-    exercise_node = cyber.Node("exercise1.2_node_name")
+    exercise_node = cyber.Node("exercise1.2_node_HONG")
     exercise = Exercise(exercise_node)
 
     exercise_node.spin()
     cyber.shutdown()
+                                                                                                                         

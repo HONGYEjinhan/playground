@@ -18,17 +18,19 @@ class Exercise(object):
         self.msg = Image()
 
         # TODO create reader
-
+        self.node.create_reader("/realsense/color_image", Image, self.callback)
         # TODO create writer
-        
+        self.writer = self.node.create_writer("/realsense/color_image/compressed", Image)
 
     def callback(self, data):
         # TODO print frame number
-
+        print('Frame number is :%s' % data.frame_no)
         # TODO api to reshape image
-
+        self.msg = data
+        self.msg.data = self.reshape(data.data)
         # TODO publish, write compressed image
-        pass
+        self.writer.write(self.msg)
+        print('Comressed image have wrote to channel /realsense/color_image/compressed')
 
     def reshape(self, data):
         """api to reshape and encodes image, you can call self.reshape(data)"""
@@ -47,9 +49,10 @@ if __name__ == '__main__':
     cyber.init()
 
     # TODO update node to your gourp_name or other thing
-    exercise_node = cyber.Node("exercise1_node_name")
+    exercise_node = cyber.Node("exercise1_node_HONG")
     exercise = Exercise(exercise_node)
 
     exercise_node.spin()
 
     cyber.shutdown()
+
