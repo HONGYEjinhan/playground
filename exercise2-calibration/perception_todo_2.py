@@ -13,8 +13,8 @@ sys.path.append("../")
 # TODO
 def translation_view(x, y):
 
-    x_r = 0
-    y_r = 0
+    x_r = 2.05825753e-06*x-5.01041906e-04*y+7.09658179e-01
+    y_r = -4.86414826e-04*x+4.12450226e-06*y+1.40273136e-01
     return x_r, y_r
 
 
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     cyber.init()
 
     # TODO update node to your name
-    exercise_node = cyber.Node("read_point")
+    exercise_node = cyber.Node("read_point_HONG")
     exercise = Exercise(exercise_node)
 
     exercise_node.spin()

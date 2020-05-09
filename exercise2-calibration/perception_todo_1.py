@@ -12,10 +12,10 @@ from modules.sensors.proto.sensor_image_pb2 import Image
 sys.path.append("../")
 
 # roll
-src_corners = [[, ], [, ], [, ], [, ]]
+src_corners = [[283,223 ], [419,223 ], [265,283 ], [452,283 ]]
 
 # turn to
-dst_corners = [[, ], [, ], [, ], [, ]]
+dst_corners = [[165,236 ], [352,236 ], [165,423 ], [352,423 ]]
 
 M = cv2.getPerspectiveTransform(
     np.float32(src_corners), np.float32(dst_corners))
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     cyber.init()
 
     # TODO update node to your name
-    exercise_node = cyber.Node("your_name")
+    exercise_node = cyber.Node("exe2.1_HONG")
     exercise = Exercise(exercise_node)
 
     exercise_node.spin()
